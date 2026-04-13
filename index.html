@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST11 Statistics — Final Exam Review</title>
+<meta name="description" content="Interactive ST11 Statistics final exam review — Claude-style design">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   CLAUDE-STYLE DESIGN SYSTEM
+   Warm, clean, minimal, premium
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg-page: #F9F5EE;
+  --bg-white: #FFFFFF;
+  --bg-warm: #F5F0E8;
+  --bg-warm-hover: #EDE8DF;
+  --bg-input: #FAF8F5;
+  --border: #E5DDD0;
+  --border-light: #EDE8DF;
+  --border-focus: #D97706;
+  --text-primary: #1C160C;
+  --text-secondary: #6B6255;
+  --text-muted: #9B9285;
+  --text-placeholder: #B5AEA3;
+  --accent: #D97706;
+  --accent-hover: #B45309;
+  --accent-bg: #FEF3C7;
+  --accent-border: #FCD34D;
+  --green: #059669;
+  --green-bg: #D1FAE5;
+  --green-border: #6EE7B7;
+  --red: #DC2626;
+  --red-bg: #FEE2E2;
+  --red-border: #FCA5A5;
+  --blue: #2563EB;
+  --blue-bg: #DBEAFE;
+  --blue-border: #93C5FD;
+  --purple: #7C3AED;
+  --purple-bg: #EDE9FE;
+  --purple-border: #C4B5FD;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+  --transition: all 0.2s ease;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+}
+
+.logo-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.logo-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* Timer */
+.timer-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-display {
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-warm);
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  min-width: 100px;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+.timer-btn {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.timer-btn:hover {
+  background: var(--bg-warm);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.timer-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Top controls */
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-toggle {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.calc-toggle:hover {
+  background: var(--bg-warm);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.submit-btn {
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.submit-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-md);
+}
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── MAIN AREA ─── */
+.main-area { display: flex; flex: 1; }
+
+.content-area {
+  flex: 1;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+.content-area.calc-open { margin-right: 360px; max-width: 100%; }
+
+/* ─── TABS ─── */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  background: var(--bg-white);
+  padding: 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  width: fit-content;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.tab-btn:hover { color: var(--text-primary); background: var(--bg-warm); }
+
+.tab-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.3);
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.tab-btn:not(.active) .tab-badge {
+  background: var(--bg-warm);
+  color: var(--text-muted);
+}
+
+/* ─── PROGRESS ─── */
+.progress-bar-container { margin-bottom: 24px; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ─── TOPIC GROUP ─── */
+.topic-group {
+  margin-bottom: 32px;
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.topic-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.topic-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+}
+
+.topic-count {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* ─── QUESTION CARD ─── */
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  transition: var(--transition);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.question-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.question-card.answered {
+  border-left: 3px solid var(--green);
+}
+.question-card.incorrect {
+  border-left: 3px solid var(--red);
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-number {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 16px;
+  white-space: nowrap;
+  border: 1px solid var(--accent-border);
+}
+
+.q-type {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-warm);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.q-status {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.q-status.correct { color: var(--green); }
+.q-status.incorrect { color: var(--red); }
+
+.question-text {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  white-space: pre-wrap;
+}
+
+/* Sub-questions */
+.sub-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.sub-q {
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.sub-q-label {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.78rem;
+  margin-bottom: 4px;
+}
+
+.sub-q-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* Answer input */
+.answer-input {
+  width: 100%;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  outline: none;
+  transition: var(--transition);
+  resize: vertical;
+  min-height: 38px;
+}
+.answer-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(217,119,6,0.1);
+}
+.answer-input::placeholder { color: var(--text-placeholder); }
+
+/* MC Options */
+.mc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.mc-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.mc-option:hover {
+  background: var(--bg-warm-hover);
+  border-color: var(--accent);
+}
+.mc-option.selected {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+}
+.mc-option.correct-answer {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+}
+.mc-option.wrong-answer {
+  background: var(--red-bg);
+  border-color: var(--red-border);
+}
+
+.mc-radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  transition: var(--transition);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.mc-option.selected .mc-radio {
+  border-color: var(--accent);
+}
+.mc-option.selected .mc-radio::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Action buttons row */
+.action-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.show-answer-btn {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.show-answer-btn:hover {
+  background: var(--bg-warm);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cheatsheet-toggle {
+  background: var(--bg-white);
+  border: 1px solid var(--purple-border);
+  color: var(--purple);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.cheatsheet-toggle:hover {
+  background: var(--purple-bg);
+}
+
+/* Solution Panel */
+.solution-panel {
+  display: none;
+  margin-top: 12px;
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  animation: slideDown 0.25s ease;
+}
+.solution-panel.visible { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.solution-title {
+  font-weight: 700;
+  color: var(--green);
+  font-size: 0.78rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.solution-content {
+  font-size: 0.83rem;
+  color: var(--text-primary);
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+/* Cheatsheet Panel */
+.cheatsheet-panel {
+  display: none;
+  margin-top: 8px;
+  background: var(--purple-bg);
+  border: 1px solid var(--purple-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  animation: slideDown 0.25s ease;
+}
+.cheatsheet-panel.visible { display: block; }
+
+.cheatsheet-title {
+  font-weight: 700;
+  color: var(--purple);
+  font-size: 0.76rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cheatsheet-content {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+}
+
+/* ─── CALCULATOR SIDEBAR ─── */
+.calculator-sidebar {
+  position: fixed;
+  right: -380px;
+  top: 0;
+  width: 360px;
+  height: 100vh;
+  background: var(--bg-white);
+  border-left: 1px solid var(--border);
+  z-index: 150;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.06);
+}
+.calculator-sidebar.open { right: 0; }
+
+.calc-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-warm);
+}
+
+.calc-sidebar-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+.calc-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  padding: 4px;
+  line-height: 1;
+}
+.calc-close:hover { color: var(--red); }
+
+.calc-iframe-container {
+  flex: 1;
+  overflow: hidden;
+}
+.calc-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ─── RESULTS MODAL ─── */
+.results-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28,22,12,0.4);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.25s ease;
+}
+.results-overlay.visible { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.results-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 560px;
+  width: 92%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.results-header { text-align: center; margin-bottom: 24px; }
+
+.results-score {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.results-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.results-grade {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.grade-excellent { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.grade-good { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.grade-fair { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border); }
+.grade-poor { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: var(--bg-warm);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.topic-results { margin-top: 16px; }
+.topic-result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.topic-result-row:last-child { border-bottom: none; }
+.topic-result-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 140px;
+}
+.topic-result-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.topic-result-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+.topic-result-score {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+}
+
+.results-close-btn {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.results-close-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .top-bar { padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
+  .content-area { padding: 16px 12px; }
+  .logo-sub { display: none; }
+  .timer-display { font-size: 1rem; min-width: 80px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="logo">
+      <div class="logo-icon">ST</div>
+      <span class="logo-text">ST11 Stats Review</span>
+      <span class="logo-sub">Final Exam Prep</span>
+    </div>
+
+    <div class="timer-widget">
+      <button class="timer-btn" id="timer-start" onclick="toggleTimer()">▶ Start</button>
+      <div class="timer-display" id="timer-display">00:00:00</div>
+      <button class="timer-btn" onclick="resetTimer()">↻ Reset</button>
+    </div>
+
+    <div class="top-controls">
+      <button class="calc-toggle" id="calc-toggle" onclick="toggleCalc()">
+        🔢 Calculator
+      </button>
+      <button class="submit-btn" onclick="submitExam()">
+        📊 Submit & Grade
+      </button>
+    </div>
+  </header>
+
+  <div class="main-area">
+    <div class="content-area" id="content-area">
+      <!-- Tab bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('pearson')" id="tab-pearson">
+          Mock A — Pearson <span class="tab-badge" id="badge-pearson">0/38</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('revision')" id="tab-revision">
+          Mock B — Revision <span class="tab-badge" id="badge-revision">0/7</span>
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-bar-container">
+        <div class="progress-label">
+          <span id="progress-text">0 of 38 answered</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div id="questions-container" class="questions-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Calculator Sidebar -->
+<div class="calculator-sidebar" id="calc-sidebar">
+  <div class="calc-sidebar-header">
+    <span class="calc-sidebar-title">🔢 Rebell SC2040</span>
+    <button class="calc-close" onclick="toggleCalc()">✕</button>
+  </div>
+  <div class="calc-iframe-container">
+    <iframe src="calculator.html" title="Calculator"></iframe>
+  </div>
+</div>
+
+<!-- Results Modal -->
+<div class="results-overlay" id="results-overlay" onclick="if(event.target===this)closeResults()">
+  <div class="results-card" id="results-card"></div>
+</div>
+
+<script src="questions-pearson.js"></script>
+<script>
+
+// ══════════════════════════════════════════════════════
+// DATA: REVISION SET (7 questions)
+// ══════════════════════════════════════════════════════
+const revisionQuestions = [
+  {
+    id: 'r1', num: 1, topic: 'Distributions', type: 'Binomial Distribution',
+    text: 'Public Health officials in France claim 22% of adults currently smoke. A sample of 7 adults is selected.\n\na) Explain why these are Bernoulli trials.\nb) What is the probability model for X? Name it and specify parameters.\nc) P(X = 2) = ?\nd) P(X ≥ 5) = ?\n\nFor a new sample of n = 1200:\ne) Expected mean and SD of number of smokers?\nf) Is Normal approximation valid? Specify parameters.\ng) Use the 68-95-99.7 rule to describe the distribution.\nh) P(more than 285 smokers) = ?',
+    subQuestions: [
+      {label:'a)', text:'Why Bernoulli trials?', answer:'two outcomes, constant p, independent'},
+      {label:'b)', text:'Model name & params?', answer:'X ~ Bin(7, 0.22)'},
+      {label:'c)', text:'P(X = 2) = ?', answer:'0.2745'},
+      {label:'d)', text:'P(X ≥ 5) = ?', answer:'0.0044'},
+      {label:'e)', text:'E(X) = ?, SD = ? (n=1200)', answer:'E=264, SD=14.35'},
+      {label:'f)', text:'Valid? Parameters?', answer:'yes, N(264, 14.35²)'},
+      {label:'h)', text:'P(X > 285) = ?', answer:'0.0721'}
+    ],
+    solution: 'a) Bernoulli: 2 outcomes (smoke/not), constant p=0.22, independent trials ✓\n\nb) X ~ Bin(7, 0.22)\n\nc) P(X=2) = C(7,2)·0.22²·0.78⁵ = 21·0.0484·0.2887 ≈ 0.2745\n\nd) P(X≥5) = P(5)+P(6)+P(7) ≈ 0.0044\n\ne) E(X) = np = 1200·0.22 = 264\n   SD = √(np(1-p)) = √(1200·0.22·0.78) ≈ 14.35\n\nf) np=264≥10, n(1-p)=936≥10 → Valid. X ~ N(264, 14.35²)\n\ng) 68%: [249.6, 278.4], 95%: [235.3, 292.7], 99.7%: [221, 307]\n\nh) z = (285-264)/14.35 = 1.46\n   P(X>285) = P(Z>1.46) ≈ 0.0721',
+    cheatsheet: '§16 Binomial:\nX ~ Bin(n,p): μ=np, σ=√(np(1-p))\nP(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ\n\nNormal approx: np≥10 AND n(1-p)≥10\nThen X ≈ N(np, np(1-p))\n\n68-95-99.7: μ±1σ, μ±2σ, μ±3σ'
+  },
+  {
+    id: 'r2', num: 2, topic: 'Chi-Square', type: 'Chi-Square Test',
+    text: '20 wine enthusiasts vs 20 wine experts in a blind tasting.\n• 10 enthusiasts correctly identified the wine.\n• 16 experts correctly identified the wine.\n\na) Construct observed and expected count tables.\nb) Why is χ² test suitable? State hypotheses.\nc) Calculate χ² and p-value.\nd) Interpret findings.',
+    subQuestions: [
+      {label:'a)', text:'Expected count for (enthusiast, correct)?', answer:'13'},
+      {label:'b)', text:'H₀ and Hₐ?', answer:'H₀: identification and group are independent'},
+      {label:'c)', text:'χ² = ?, p-value?', answer:'χ²=3.96, p≈0.047'},
+      {label:'d)', text:'Conclusion at α=0.05?', answer:'reject H₀, significant association'}
+    ],
+    solution: 'Observed:\n           Correct  Wrong  Total\nEnthusiast   10      10     20\nExpert       16       4     20\nTotal        26      14     40\n\nExpected = (row×col)/grand total:\nE(enth,corr) = 20×26/40 = 13\nE(enth,wrong) = 20×14/40 = 7\nE(exp,corr) = 13, E(exp,wrong) = 7\n\nχ² = (10-13)²/13 + (10-7)²/7 + (16-13)²/13 + (4-7)²/7\n   = 0.692 + 1.286 + 0.692 + 1.286 = 3.956\n\ndf = (2-1)(2-1) = 1,  p ≈ 0.047\n\nAt α=0.05: p < 0.05 → Reject H₀. Significant association between group and identification ability.',
+    cheatsheet: '§25 Chi-Square:\nExpected = (row total × col total) / grand total\nχ² = Σ(O-E)²/E,  df = (r-1)(c-1)\n\nH₀: variables are independent\nHₐ: variables are associated\nReject if p < α'
+  },
+  {
+    id: 'r3', num: 3, topic: 'Confidence Intervals', type: 'CI for Proportion',
+    text: 'A clinic wants to estimate the proportion of patients satisfied with their care.\n225 out of 300 patients reported being satisfied.\n\na) Calculate p̂.\nb) Construct a 99% CI for p.\nc) Interpret the CI.\nd) Would the result change at 90% confidence? How?',
+    subQuestions: [
+      {label:'a)', text:'p̂ = ?', answer:'0.75'},
+      {label:'b)', text:'99% CI = ?', answer:'(0.686, 0.814)'},
+      {label:'c)', text:'Interpretation?', answer:'99% confident true proportion is between 0.686 and 0.814'},
+      {label:'d)', text:'90% CI narrower or wider?', answer:'narrower'}
+    ],
+    solution: 'a) p̂ = 225/300 = 0.75\n\nb) SE = √(0.75·0.25/300) = √(0.000625) = 0.025\n   99% CI: 0.75 ± 2.576·0.025 = 0.75 ± 0.0644\n   → (0.686, 0.814)\n\nc) We are 99% confident that the true proportion of satisfied patients lies between 68.6% and 81.4%.\n\nd) A 90% CI would be NARROWER (z*=1.645 vs 2.576):\n   0.75 ± 1.645·0.025 = (0.709, 0.791)',
+    cheatsheet: '§ CI for p:\np̂ ± z*·√(p̂(1-p̂)/n)\n\nz* values: 90%→1.645, 95%→1.96, 99%→2.576\n\nHigher confidence → wider interval\nLarger n → narrower interval'
+  },
+  {
+    id: 'r4', num: 4, topic: 'Hypothesis Testing', type: 'One-sample t-test',
+    text: 'A company claims their battery lasts at least 500 hours. A sample of 36 batteries gives x̄ = 490, s = 30.\n\na) State hypotheses.\nb) Calculate t-statistic.\nc) Find p-value.\nd) Conclude at α = 0.05.',
+    subQuestions: [
+      {label:'a)', text:'H₀ and Hₐ?', answer:'H₀: μ ≥ 500, Hₐ: μ < 500'},
+      {label:'b)', text:'t = ?', answer:'-2.00'},
+      {label:'c)', text:'p-value ≈ ?', answer:'0.027'},
+      {label:'d)', text:'Conclusion?', answer:'reject H₀'}
+    ],
+    solution: 'a) H₀: μ ≥ 500 (claim is true)\n   Hₐ: μ < 500 (battery lasts less)\n\nb) t = (490 - 500) / (30/√36) = -10/5 = -2.00\n\nc) df = 35, one-tailed\n   p-value ≈ 0.027\n\nd) p = 0.027 < 0.05 → Reject H₀.\n   There is sufficient evidence that the mean battery life is less than 500 hours.',
+    cheatsheet: '§ t-test for μ:\nt = (x̄ - μ₀) / (s/√n), df = n-1\n\nOne-tailed test:\nHₐ: μ < μ₀ → left tail\nHₐ: μ > μ₀ → right tail\n\nReject if p < α'
+  },
+  {
+    id: 'r5', num: 5, topic: 'Hypothesis Testing', type: 'z-test for Mean',
+    text: 'A population σ = 15. Sample of n = 49 gives x̄ = 82.\n\na) Test H₀: μ = 80 vs Hₐ: μ > 80 at α = 0.05.\nb) What is the critical value?\nc) Can we reject H₀?',
+    subQuestions: [
+      {label:'a)', text:'z = ?', answer:'0.933'},
+      {label:'b)', text:'Critical value?', answer:'1.645'},
+      {label:'c)', text:'Reject H₀?', answer:'no'}
+    ],
+    solution: 'a) z = (82 - 80) / (15/√49) = 2 / 2.143 = 0.933\n\nb) Right-tail at α=0.05: z_crit = 1.645\n\nc) z = 0.933 < 1.645 → Do NOT reject H₀.\n   Insufficient evidence that μ > 80.',
+    cheatsheet: '§ z-test for μ (known σ):\nz = (x̄ - μ₀) / (σ/√n)\n\nCritical values (one-tail):\nα=0.10 → 1.282\nα=0.05 → 1.645\nα=0.01 → 2.326'
+  },
+  {
+    id: 'r6', num: 6, topic: 'Two-sample Tests', type: 'Two-sample t-test',
+    text: 'Group A (n=15, x̄=78, s=8) vs Group B (n=20, x̄=72, s=10).\n\na) State hypotheses to test if Group A scores higher.\nb) Calculate the test statistic.\nc) Conclude at α = 0.05.',
+    subQuestions: [
+      {label:'a)', text:'H₀ and Hₐ?', answer:'H₀: μ₁ - μ₂ ≤ 0, Hₐ: μ₁ - μ₂ > 0'},
+      {label:'b)', text:'t ≈ ?', answer:'1.94'},
+      {label:'c)', text:'Reject H₀?', answer:'depends on df, borderline'}
+    ],
+    solution: 'a) H₀: μ₁ - μ₂ ≤ 0 (no difference or B higher)\n   Hₐ: μ₁ - μ₂ > 0 (A is higher)\n\nb) SE = √(s₁²/n₁ + s₂²/n₂) = √(64/15 + 100/20) = √(4.267+5) = √9.267 ≈ 3.044\n   t = (78-72)/3.044 = 6/3.044 ≈ 1.97\n\nc) Using Welch df ≈ 32.8, one-tail\n   t_crit(0.05, ~33) ≈ 1.692\n   t = 1.97 > 1.692 → Reject H₀.\n   Sufficient evidence that Group A scores higher.',
+    cheatsheet: '§ Two-sample t-test (Welch):\nt = (x̄₁ - x̄₂) / √(s₁²/n₁ + s₂²/n₂)\n\nWelch df: complex formula (use calculator)\nUse when σ₁² ≠ σ₂² (not pooled)'
+  },
+  {
+    id: 'r7', num: 7, topic: 'Excel Functions', type: 'Excel Functions',
+    text: 'Match each scenario to the correct Excel function:\n\na) P(X ≤ 3) for Bin(10, 0.2)\nb) P(Z < 1.96)\nc) Find z such that P(Z < z) = 0.975\nd) P(X = 5) for Poisson(λ=4)\ne) Find x such that P(X ≤ x) = 0.05 for N(100, 15²)',
+    subQuestions: [
+      {label:'a)', text:'Excel function for Bin CDF?', answer:'=BINOM.DIST(3,10,0.2,TRUE)'},
+      {label:'b)', text:'Excel function for P(Z<1.96)?', answer:'=NORM.S.DIST(1.96,TRUE)'},
+      {label:'c)', text:'Inverse normal?', answer:'=NORM.S.INV(0.975)'},
+      {label:'d)', text:'Poisson PMF?', answer:'=POISSON.DIST(5,4,FALSE)'},
+      {label:'e)', text:'Inverse normal with μ,σ?', answer:'=NORM.INV(0.05,100,15)'}
+    ],
+    solution: 'a) =BINOM.DIST(3, 10, 0.2, TRUE)\n   TRUE = cumulative (CDF), FALSE = exact (PMF)\n\nb) =NORM.S.DIST(1.96, TRUE)\n   Standard normal CDF\n\nc) =NORM.S.INV(0.975)\n   Returns z = 1.96\n\nd) =POISSON.DIST(5, 4, FALSE)\n   FALSE = exact P(X=5), TRUE = cumulative\n\ne) =NORM.INV(0.05, 100, 15)\n   Returns x for given cumulative probability with μ and σ',
+    cheatsheet: '§ Excel Functions:\nBinomial: =BINOM.DIST(k, n, p, cumulative)\nPoisson: =POISSON.DIST(k, λ, cumulative)\nNormal: =NORM.DIST(x, μ, σ, TRUE)\nStd Normal: =NORM.S.DIST(z, TRUE)\nInverse: =NORM.INV(p, μ, σ) or =NORM.S.INV(p)\n\ncumulative: TRUE = P(X≤k), FALSE = P(X=k)'
+  }
+];
+
+// ══════════════════════════════════════════════════════
+// APP STATE
+// ══════════════════════════════════════════════════════
+let currentTab = 'pearson';
+let answers = {};
+let timerSeconds = 0;
+let timerInterval = null;
+let timerRunning = false;
+let examSubmitted = false;
+
+// ══════════════════════════════════════════════════════
+// TIMER
+// ══════════════════════════════════════════════════════
+function formatTime(s) {
+  const h = String(Math.floor(s/3600)).padStart(2,'0');
+  const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
+  const sec = String(s%60).padStart(2,'0');
+  return `${h}:${m}:${sec}`;
+}
+
+function toggleTimer() {
+  const btn = document.getElementById('timer-start');
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    btn.textContent = '▶ Start';
+    btn.classList.remove('active');
+  } else {
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      document.getElementById('timer-display').textContent = formatTime(timerSeconds);
+    }, 1000);
+    timerRunning = true;
+    btn.textContent = '⏸ Pause';
+    btn.classList.add('active');
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  document.getElementById('timer-display').textContent = '00:00:00';
+  const btn = document.getElementById('timer-start');
+  btn.textContent = '▶ Start';
+  btn.classList.remove('active');
+}
+
+// ══════════════════════════════════════════════════════
+// CALCULATOR
+// ══════════════════════════════════════════════════════
+function toggleCalc() {
+  const sb = document.getElementById('calc-sidebar');
+  const ca = document.getElementById('content-area');
+  sb.classList.toggle('open');
+  ca.classList.toggle('calc-open');
+}
+
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-pearson').classList.toggle('active', tab === 'pearson');
+  document.getElementById('tab-revision').classList.toggle('active', tab === 'revision');
+  renderQuestions();
+  updateProgress();
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER QUESTIONS
+// ══════════════════════════════════════════════════════
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  const questions = currentTab === 'pearson' ? pearsonQuestions : revisionQuestions;
+
+  // Group by topic
+  const groups = {};
+  questions.forEach(q => {
+    const topic = q.topic || q.type;
+    if (!groups[topic]) groups[topic] = [];
+    groups[topic].push(q);
+  });
+
+  let html = '';
+  for (const [topicName, qs] of Object.entries(groups)) {
+    html += `<div class="topic-group">
+      <div class="topic-header">
+        <div class="topic-dot"></div>
+        <span class="topic-name">${topicName}</span>
+        <span class="topic-count">${qs.length} questions</span>
+      </div>
+      <div class="questions-container">`;
+
+    qs.forEach(q => {
+      const hasAnswer = checkHasAnswer(q);
+      html += `<div class="question-card ${examSubmitted ? (checkCorrect(q) ? 'answered' : 'incorrect') : (hasAnswer ? 'answered' : '')}" id="card-${q.id}">
+        <div class="question-header">
+          <span class="q-number">Q${q.num}</span>
+          <span class="q-type">${q.type}</span>
+          ${examSubmitted ? `<span class="q-status ${checkCorrect(q) ? 'correct' : 'incorrect'}">${checkCorrect(q) ? '✓ Correct' : '✗ Incorrect'}</span>` : ''}
+        </div>
+        <div class="question-text">${q.text}</div>`;
+
+      // MC Options
+      if (q.options) {
+        html += `<div class="mc-options">`;
+        q.options.forEach(opt => {
+          const letter = opt.charAt(0);
+          const isSelected = answers[q.id] === letter;
+          let cls = isSelected ? 'selected' : '';
+          if (examSubmitted) {
+            if (letter === q.answer) cls += ' correct-answer';
+            else if (isSelected && letter !== q.answer) cls += ' wrong-answer';
+          }
+          html += `<div class="mc-option ${cls}" onclick="selectMC('${q.id}','${letter}')">
+            <div class="mc-radio"></div>
+            <span>${opt}</span>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
+      // Sub-questions
+      if (q.subQuestions) {
+        html += `<div class="sub-questions">`;
+        q.subQuestions.forEach((sq, i) => {
+          const key = `${q.id}_sub${i}`;
+          const val = answers[key] || '';
+          html += `<div class="sub-q">
+            ${sq.label ? `<div class="sub-q-label">${sq.label}</div>` : ''}
+            <div class="sub-q-text">${sq.text}</div>
+            <input type="text" class="answer-input" placeholder="Your answer..."
+              value="${val}" onchange="saveSubAnswer('${key}', this.value)"
+              ${examSubmitted ? 'disabled' : ''}>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
+      // Action buttons
+      html += `<div class="action-row">
+        <button class="show-answer-btn" onclick="toggleSolution('${q.id}')">
+          💡 Show Solution
+        </button>
+        <button class="cheatsheet-toggle" onclick="toggleCheatsheet('${q.id}')">
+          📋 Cheatsheet
+        </button>
+      </div>`;
+
+      // Solution panel
+      html += `<div class="solution-panel" id="sol-${q.id}">
+        <div class="solution-title">💡 Solution</div>
+        <div class="solution-content">${q.solution || ''}</div>
+      </div>`;
+
+      // Cheatsheet panel
+      html += `<div class="cheatsheet-panel" id="cs-${q.id}">
+        <div class="cheatsheet-title">📋 Cheatsheet Reference</div>
+        <div class="cheatsheet-content">${q.cheatsheet || ''}</div>
+      </div>`;
+
+      html += `</div>`;
+    });
+
+    html += `</div></div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════════════════
+function selectMC(qId, letter) {
+  if (examSubmitted) return;
+  answers[qId] = letter;
+  renderQuestions();
+  updateProgress();
+}
+
+function saveSubAnswer(key, value) {
+  answers[key] = value;
+  updateProgress();
+}
+
+function toggleSolution(qId) {
+  const panel = document.getElementById('sol-' + qId);
+  panel.classList.toggle('visible');
+}
+
+function toggleCheatsheet(qId) {
+  const panel = document.getElementById('cs-' + qId);
+  panel.classList.toggle('visible');
+}
+
+function checkHasAnswer(q) {
+  if (q.options) return !!answers[q.id];
+  if (q.subQuestions) return q.subQuestions.some((_, i) => answers[`${q.id}_sub${i}`]);
+  return false;
+}
+
+function fuzzyMatch(userAns, correctAns) {
+  if (!userAns) return false;
+  const u = userAns.toString().toLowerCase().replace(/\s+/g, '').replace(/[,;]/g, '');
+  const c = correctAns.toString().toLowerCase().replace(/\s+/g, '').replace(/[,;]/g, '');
+  if (u === c) return true;
+  if (c.includes(u) && u.length > 2) return true;
+  const uNum = parseFloat(u);
+  const cNum = parseFloat(c);
+  if (!isNaN(uNum) && !isNaN(cNum) && Math.abs(uNum - cNum) < 0.02) return true;
+  return false;
+}
+
+function checkCorrect(q) {
+  if (q.options) {
+    return answers[q.id] === q.answer;
+  }
+  if (q.subQuestions) {
+    let correct = 0;
+    q.subQuestions.forEach((sq, i) => {
+      if (fuzzyMatch(answers[`${q.id}_sub${i}`], sq.answer)) correct++;
+    });
+    return correct >= Math.ceil(q.subQuestions.length / 2);
+  }
+  return false;
+}
+
+// ══════════════════════════════════════════════════════
+// PROGRESS
+// ══════════════════════════════════════════════════════
+function updateProgress() {
+  const questions = currentTab === 'pearson' ? pearsonQuestions : revisionQuestions;
+  const total = questions.length;
+  let answered = 0;
+  questions.forEach(q => { if (checkHasAnswer(q)) answered++; });
+
+  document.getElementById('progress-text').textContent = `${answered} of ${total} answered`;
+  const pct = total > 0 ? Math.round(answered / total * 100) : 0;
+  document.getElementById('progress-pct').textContent = `${pct}%`;
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+
+  // Update badges
+  const pAns = pearsonQuestions.filter(q => checkHasAnswer(q)).length;
+  const rAns = revisionQuestions.filter(q => checkHasAnswer(q)).length;
+  document.getElementById('badge-pearson').textContent = `${pAns}/${pearsonQuestions.length}`;
+  document.getElementById('badge-revision').textContent = `${rAns}/${revisionQuestions.length}`;
+}
+
+// ══════════════════════════════════════════════════════
+// GRADING
+// ══════════════════════════════════════════════════════
+function submitExam() {
+  if (examSubmitted) return;
+  if (!confirm('Submit your exam for grading? You won\'t be able to change answers after this.')) return;
+  examSubmitted = true;
+  if (timerRunning) toggleTimer();
+
+  const allQ = [...pearsonQuestions, ...revisionQuestions];
+  let correct = 0;
+  allQ.forEach(q => { if (checkCorrect(q)) correct++; });
+
+  const total = allQ.length;
+  const pct = Math.round(correct / total * 100);
+  const grade20 = Math.round(correct / total * 20 * 10) / 10;
+
+  // Topic breakdown
+  const topicMap = {};
+  allQ.forEach(q => {
+    const t = q.topic || q.type;
+    if (!topicMap[t]) topicMap[t] = { correct: 0, total: 0 };
+    topicMap[t].total++;
+    if (checkCorrect(q)) topicMap[t].correct++;
+  });
+
+  let gradeClass = 'grade-poor';
+  let gradeLabel = 'Needs Work';
+  if (grade20 >= 16) { gradeClass = 'grade-excellent'; gradeLabel = 'Excellent'; }
+  else if (grade20 >= 12) { gradeClass = 'grade-good'; gradeLabel = 'Good'; }
+  else if (grade20 >= 10) { gradeClass = 'grade-fair'; gradeLabel = 'Passable'; }
+
+  let topicHTML = '';
+  for (const [name, data] of Object.entries(topicMap)) {
+    const pctTopic = Math.round(data.correct / data.total * 100);
+    const color = pctTopic >= 80 ? 'var(--green)' : pctTopic >= 50 ? 'var(--accent)' : 'var(--red)';
+    topicHTML += `<div class="topic-result-row">
+      <span class="topic-result-name">${name}</span>
+      <div class="topic-result-bar">
+        <div class="topic-result-fill" style="width:${pctTopic}%; background:${color}"></div>
+      </div>
+      <span class="topic-result-score">${data.correct}/${data.total}</span>
+    </div>`;
+  }
+
+  document.getElementById('results-card').innerHTML = `
+    <div class="results-header">
+      <div class="results-score">${grade20}/20</div>
+      <div class="results-subtitle">${correct} correct out of ${total} questions · ${pct}%</div>
+      <div class="results-grade ${gradeClass}">${gradeLabel}</div>
+    </div>
+    <div class="results-stats">
+      <div class="stat-box">
+        <div class="stat-value">${correct}</div>
+        <div class="stat-label">Correct</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">${total - correct}</div>
+        <div class="stat-label">Incorrect</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">${formatTime(timerSeconds)}</div>
+        <div class="stat-label">Time</div>
+      </div>
+    </div>
+    <div class="topic-results">
+      <div style="font-weight:700;font-size:0.82rem;margin-bottom:10px;color:var(--text-primary)">Performance by Topic</div>
+      ${topicHTML}
+    </div>
+    <button class="results-close-btn" onclick="closeResults()">Review Answers</button>
+  `;
+
+  document.getElementById('results-overlay').classList.add('visible');
+  renderQuestions();
+}
+
+function closeResults() {
+  document.getElementById('results-overlay').classList.remove('visible');
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+renderQuestions();
+updateProgress();
+</script>
+</body>
+</html>
