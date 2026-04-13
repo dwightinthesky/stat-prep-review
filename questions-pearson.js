@@ -52,7 +52,7 @@ const pearsonQuestions = [
   {
     id:'p5', num:4, topic:'Data Visualization',
     type:'Pareto Diagram',
-    text:'Shopping mall tenants. Data from 127 malls housing 1,922 stores.\nTenants categorised by floor space:\n\n  Category                        Code    Count\n  Anchor (>30,000 sq ft)           A       750\n  Major space (10,000–30,000)      MS       72\n  Large standard (4,000–10,000)    LS      244\n  Small standard (1,500–4,000)     SS      827\n  Small (<1,500 sq ft)             S        29\n\nPart 1: Which Pareto diagram is correct?\n  A. Bars ordered: S, MS, LS, A, SS  (ascending)\n  B. Bars ordered: A, SS, S, MS, LS\n  C. Bars ordered: LS, S, MS, SS, A\n  D. Bars ordered: SS, A, LS, MS, S  (descending)\n\nPart 2: Interpret the Pareto diagram.',
+    text:'Shopping mall tenants. Data from 127 malls housing 1,922 stores.\\nTenants categorised by floor space:\\n\\n```\\n  Category                        Code    Count\\n  Anchor (>30,000 sq ft)           A       750\\n  Major space (10,000–30,000)      MS       72\\n  Large standard (4,000–10,000)    LS      244\\n  Small standard (1,500–4,000)     SS      827\\n  Small (<1,500 sq ft)             S        29\\n```\\n\\nPart 1: Which Pareto diagram is correct?\\n  A. Bars ordered: S, MS, LS, A, SS  (ascending)\\n  B. Bars ordered: A, SS, S, MS, LS\\n  C. Bars ordered: LS, S, MS, SS, A\\n  D. Bars ordered: SS, A, LS, MS, S  (descending)\\n\\nPart 2: Interpret the Pareto diagram.',
     subQuestions:[
       {label:'Part 1)', text:'Correct Pareto diagram? (A/B/C/D)', answer:'D'},
       {label:'Part 2)', text:'Interpretation? (A/B/C/D)\nA. Few stores are large standard or small standard.\nB. Most stores are small standard or small.\nC. Few stores are anchor or major space.\nD. Most stores are small standard or anchor.', answer:'D'}
@@ -90,7 +90,7 @@ const pearsonQuestions = [
   {
     id:'p7', num:7, topic:'Descriptive Stats',
     type:'Mean / Median / Mode / Skewness',
-    text:'Golf driving performance index. Twenty observations:\n\n1.23  2.86  1.66  1.99  1.31  1.41  1.77  2.91  2.56  1.41\n3.43  2.34  3.29  1.41  2.01  1.23  2.47  2.14  2.18  1.39\n\na. Find the mean.\nb. Find the median.\nc. Find the mode.\nd. Which measure best describes the data? Why?\ne. Is the distribution skewed? If yes, in what direction?',
+    text:'Golf driving performance index. Twenty observations:\\n\\n```\\n1.23  2.86  1.66  1.99  1.31  1.41  1.77  2.91  2.56  1.41\\n3.43  2.34  3.29  1.41  2.01  1.23  2.47  2.14  2.18  1.39\\n```\\n\\na. Find the mean.\\nb. Find the median.\\nc. Find the mode.\\nd. Which measure best describes the data? Why?\\ne. Is the distribution skewed? If yes, in what direction?',
     subQuestions:[
       {label:'a)', text:'Mean = ?', answer:'2.05'},
       {label:'b)', text:'Median = ?', answer:'2.00'},
@@ -117,7 +117,7 @@ const pearsonQuestions = [
   {
     id:'p8', num:9, topic:'Descriptive Stats',
     type:'Range / SD / Variability',
-    text:'Sandstone permeability. Slices tested under three conditions:\n\n  Variable   N    StDev   Variance   Min     Max     Range\n  PermA     100   14.87   221.19    54.40   120.70   66.30\n  PermB     100   22.22   493.56    50.80   150.40   99.60\n  PermC     100   20.49   419.74    53.20   129.40   76.20\n\na. Find the range for Group A. Verify using Min and Max.\nb. Find the SD for Group A. Verify using the variance.\nc. Which condition (A, B, or C) has the most variable data?',
+    text:'Sandstone permeability. Slices tested under three conditions:\\n\\n```\\n  Variable   N    StDev   Variance   Min     Max     Range\\n  PermA     100   14.87   221.19    54.40   120.70   66.30\\n  PermB     100   22.22   493.56    50.80   150.40   99.60\\n  PermC     100   20.49   419.74    53.20   129.40   76.20\\n```\\n\\na. Find the range for Group A. Verify using Min and Max.\\nb. Find the SD for Group A. Verify using the variance.\\nc. Which condition (A, B, or C) has the most variable data?',
     subQuestions:[
       {label:'a)', text:'Range for Group A = ?', answer:'66.30'},
       {label:'', text:'Verify: Max − Min = ?', answer:'120.70 - 54.40 = 66.30'},
@@ -135,7 +135,7 @@ const pearsonQuestions = [
   {
     id:'p12', num:10, topic:'Contingency Tables',
     type:'Two-way Table Proportions',
-    text:'Travel professionals survey. 284 total (96 males, 188 females).\nOpinion on salary fairness:\n\n                  Males    Females\n  Salary too low    30        99\n  Equitable/fair    56        66\n  Paid well         10        23\n  TOTALS            96       188\n\na. Compare proportions who believe salary is too low (male vs female).\nb. Compare proportions who believe salary is equitable/fair.\nc. Compare proportions who believe they are paid well.\nd. Do opinions on salary fairness differ by gender?',
+    text:'Travel professionals survey. 284 total (96 males, 188 females).\\nOpinion on salary fairness:\\n\\n```\\n                  Males    Females\\n  Salary too low    30        99\\n  Equitable/fair    56        66\\n  Paid well         10        23\\n  TOTALS            96       188\\n```\\n\\na. Compare proportions who believe salary is too low (male vs female).\\nb. Compare proportions who believe salary is equitable/fair.\\nc. Compare proportions who believe they are paid well.\\nd. Do opinions on salary fairness differ by gender?',
     subQuestions:[
       {label:'a)', text:'Proportion male "too low" = ?', answer:'0.313'},
       {label:'', text:'Proportion female "too low" = ?', answer:'0.527'},
@@ -152,7 +152,7 @@ const pearsonQuestions = [
   {
     id:'p11', num:11, topic:'Contingency Tables',
     type:'Expected Counts / Chi-Square / Cramér\'s V',
-    text:'2×3 contingency table:\n\n          Col 1   Col 2   Col 3\n  Row 1     8      32      55\n  Row 2    19      26      25\n\na. Find all expected cell counts (E₁₁, E₁₂, E₁₃, E₂₁, E₂₂, E₂₃).\nb. Calculate χ².\nc. Calculate Cramér\'s V coefficient.',
+    text:'2×3 contingency table:\\n\\n```\\n          Col 1   Col 2   Col 3\\n  Row 1     8      32      55\\n  Row 2    19      26      25\\n```\\n\\na. Find all expected cell counts (E₁₁, E₁₂, E₁₃, E₂₁, E₂₂, E₂₃).\\nb. Calculate χ².\\nc. Calculate Cramér\'s V coefficient.',
     subQuestions:[
       {label:'a)', text:'E₁₁ = ?', answer:'15.545'},
       {label:'', text:'E₁₂ = ?', answer:'33.394'},
@@ -213,7 +213,7 @@ const pearsonQuestions = [
   {
     id:'p15', num:15, topic:'Regression',
     type:'Scatterplot & Least Squares',
-    text:'Data:\n\n  x:  5   4  −2   2   8   5   4\n  y:  3   5   0   1   9   4   3\n\na. Construct a scatterplot.\nb. What does the scatterplot suggest about the relationship?\nc. Find the least squares line ŷ = β̂₀ + β̂₁x.\nd. Does the line appear to fit the data well?',
+    text:'Data:\\n\\n```\\n  x:  5   4  −2   2   8   5   4\\n  y:  3   5   0   1   9   4   3\\n```\\n\\na. Construct a scatterplot.\\nb. What does the scatterplot suggest about the relationship?\\nc. Find the least squares line ŷ = β̂₀ + β̂₁x.\\nd. Does the line appear to fit the data well?',
     subQuestions:[
       {label:'b)', text:'Relationship? (positive/negative linear)', answer:'positive linear'},
       {label:'c)', text:'β̂₁ (slope) = ?', answer:'0.838'},
@@ -348,7 +348,7 @@ const pearsonQuestions = [
   {
     id:'p33', num:25, topic:'Normal Distribution',
     type:'Histogram Normality Assessment',
-    text:'Rock fracture: A histogram of JRC (Joint Roughness Coefficient) for 750 rock specimens shows:\n\n  JRC range: 0 to 20\n  Peak frequency: ~68 at JRC ≈ 9–10\n  Distribution shape: roughly bell-shaped with a normal curve overlay\n  Slight asymmetry: left side rises more steeply, right tail extends slightly longer\n  Frequencies: 0–3 (low, ~2–5), 3–6 (moderate, ~15–35), 6–10 (high, ~45–68),\n               10–14 (moderate, ~22–48), 14–17 (low, ~5–22), 17–20 (very low, ~1–3)\n\n  Summary stats: x̄ = 9.17, s = 3.93, Q₁ = 6.2, Q₃ = 12.2\n\na. Does the histogram suggest approximate normality?\nb. Check IQR/s ratio.\nc. Check 68-95-99.7 rule with the given stats.',
+    text:'Rock fracture: A histogram of JRC (Joint Roughness Coefficient) for 750 rock specimens shows:\\n\\n```\\n  JRC range: 0 to 20\\n  Peak frequency: ~68 at JRC ≈ 9–10\\n  Distribution shape: roughly bell-shaped with a normal curve overlay\\n  Slight asymmetry: left side rises more steeply, right tail extends slightly longer\\n  Frequencies: 0–3 (low, ~2–5), 3–6 (moderate, ~15–35), 6–10 (high, ~45–68),\\n               10–14 (moderate, ~22–48), 14–17 (low, ~5–22), 17–20 (very low, ~1–3)\\n\\n  Summary stats: x̄ = 9.17, s = 3.93, Q₁ = 6.2, Q₃ = 12.2\\n```\\n\\na. Does the histogram suggest approximate normality?\\nb. Check IQR/s ratio.\\nc. Check 68-95-99.7 rule with the given stats.',
     subQuestions:[
       {label:'a)', text:'Approximately normal from histogram? (yes/no)', answer:'yes, roughly'},
       {label:'b)', text:'IQR/s = ?', answer:'1.53'},
